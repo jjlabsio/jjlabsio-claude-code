@@ -1,0 +1,24 @@
+{
+  "name": "jjlabsio-claude-code",
+  "owner": {
+    "name": "jjlabsio",
+    "email": "wowlxx28@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "jj",
+      "source": "./",
+      "description": "Claude Code configuration collection for jjlabsio",
+      "version": "1.0.0",
+      "author": {
+        "name": "jjlabsio"
+      },
+      "homepage": "https://github.com/jjlabsio/jjlabsio-claude-code",
+      "repository": "https://github.com/jjlabsio/jjlabsio-claude-code",
+      "license": "MIT",
+      "keywords": ["agents", "skills", "hooks", "commands"],
+      "category": "workflow",
+      "tags": ["agents", "skills", "hooks", "commands"]
+    }
+  ]
+}

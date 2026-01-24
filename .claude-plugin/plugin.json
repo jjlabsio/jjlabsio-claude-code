@@ -1,0 +1,19 @@
+{
+  "name": "jj",
+  "version": "1.0.0",
+  "source": "./",
+  "description": "Claude Code configuration collection for jjlabsio",
+  "author": {
+    "name": "jjlabsio",
+    "url": "https://github.com/jjlabsio"
+  },
+  "homepage": "https://github.com/jjlabsio/jjlabsio-claude-code",
+  "repository": "https://github.com/jjlabsio/jjlabsio-claude-code",
+  "license": "MIT",
+  "keywords": ["agents", "skills", "hooks", "commands"],
+  "commands": "./commands",
+  "agents": "./agents",
+  "skills": "./skills",
+  "hooks": "./hooks/hooks.json",
+  "mcpServers": "./.mcp.json"
+}
