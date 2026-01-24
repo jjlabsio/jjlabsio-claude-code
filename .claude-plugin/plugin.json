@@ -12,6 +12,5 @@
   "keywords": ["agents", "skills", "hooks", "commands"],
   "commands": "./commands",
   "skills": "./skills",
-  "hooks": "./hooks/hooks.json",
   "mcpServers": "./.mcp.json"
 }
