@@ -11,6 +11,7 @@
   "license": "MIT",
   "keywords": ["agents", "skills", "hooks", "commands"],
   "commands": "./commands",
+  "hooks": "./hooks/hooks.json",
   "skills": "./skills",
   "mcpServers": "./.mcp.json"
 }
