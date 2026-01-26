@@ -91,3 +91,12 @@ When modifying this plugin:
 - Agent frontmatter must include: name, description, tools, model
 - Command frontmatter must include: description
 - Test changes by installing the plugin locally
+
+### Rules 작성 가이드라인 (중요)
+
+Rules 문서는 매 요청마다 컨텍스트에 로드되어 토큰을 지속적으로 점유합니다. 최대한 간결하게 작성하세요:
+
+- 불필요한 설명 제거 - 핵심만 남기기
+- 코드 예시는 5-10줄 이내
+- 중복 내용 없이 bullet point로 정리
+- 장황한 문장 대신 키워드 중심으로 작성
