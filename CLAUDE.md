@@ -91,6 +91,7 @@ When modifying this plugin:
 - Agent frontmatter must include: name, description, tools, model
 - Command frontmatter must include: description
 - Test changes by installing the plugin locally
+- **Version updates**: Both `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` must be updated together
 
 ### Rules 작성 가이드라인 (중요)
 
