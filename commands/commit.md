@@ -32,9 +32,9 @@ Create a git commit following the project's git-workflow and security rules.
    - Fix MEDIUM issues when possible
 
 4. **Stage Files**
-   - If no files staged, prompt user to select files
-   - Prefer staging specific files over `git add -A`
-   - Never stage sensitive files (.env, credentials, secrets)
+   - Analyze changes and group by logical units (feature, bugfix, refactor, etc.)
+   - Create separate commits for each meaningful unit
+   - Automatically exclude sensitive files (.env, credentials, secrets)
 
 5. **Create Commit** (See: `rules/git-workflow.md`)
    - Format: `<type>: <description>`
@@ -46,15 +46,24 @@ Create a git commit following the project's git-workflow and security rules.
 ## Examples
 
 ```bash
-# Feature
+# Single commits
 git commit -m "feat: add user authentication flow"
-
-# Bug fix
 git commit -m "fix: resolve race condition in data fetching"
-
-# Refactor
 git commit -m "refactor: extract validation logic to separate module"
 ```
+
+## Grouping Example
+
+If changes include:
+- `src/auth/login.ts` (new feature)
+- `src/auth/login.test.ts` (test for above)
+- `src/utils/format.ts` (bug fix)
+- `README.md` (docs update)
+
+Create 3 separate commits:
+1. `feat: add login authentication` (login.ts + login.test.ts)
+2. `fix: correct date format output` (format.ts)
+3. `docs: update README` (README.md)
 
 ## Arguments
 
@@ -65,13 +74,19 @@ $ARGUMENTS:
 ## Interactive Mode
 
 If no arguments provided:
-1. Show `git status` output
+1. Show `git status` and `git diff` to analyze all changes
 2. Run **security-reviewer** if changes involve auth/input/secrets
 3. Run **code-reviewer** for quality check
-4. Ask which files to stage
-5. Suggest commit type based on changes
-6. Generate commit message draft
-7. Confirm before committing
+4. Group changes into logical units:
+   - By feature/functionality
+   - By file relationship (e.g., component + test + styles)
+   - By change type (feat vs fix vs refactor)
+5. For each logical unit:
+   - Stage related files
+   - Auto-detect commit type
+   - Auto-generate commit message
+   - Create commit
+6. Repeat until all changes are committed
 
 ## Related Rules
 
