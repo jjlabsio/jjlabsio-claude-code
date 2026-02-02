@@ -17,7 +17,11 @@ Create a git commit following the project's git-workflow and security rules.
    - Run `git diff --staged` to see staged changes
    - Run `git diff` to see unstaged changes
 
-2. **Security Review** (See: `rules/security.md`)
+2. **Determine Commit Strategy**
+   - **If staged changes exist**: Commit only staged changes (ignore unstaged)
+   - **If no staged changes**: Stage and commit all changes with grouping logic
+
+3. **Security Review** (See: `rules/security.md`)
    - Use **security-reviewer** agent for code handling auth, user input, or secrets
    - Verify mandatory security checklist:
      - [ ] No hardcoded secrets (API keys, passwords, tokens)
@@ -26,17 +30,17 @@ Create a git commit following the project's git-workflow and security rules.
      - [ ] XSS prevention (sanitized HTML)
      - [ ] Error messages don't leak sensitive data
 
-3. **Code Review** (See: `rules/agents.md`)
+4. **Code Review** (See: `rules/agents.md`)
    - Use **code-reviewer** agent after writing/modifying code
    - Address CRITICAL and HIGH issues before committing
    - Fix MEDIUM issues when possible
 
-4. **Stage Files**
+5. **Stage Files** (only when no staged changes)
    - Analyze changes and group by logical units (feature, bugfix, refactor, etc.)
    - Create separate commits for each meaningful unit
    - Automatically exclude sensitive files (.env, credentials, secrets)
 
-5. **Create Commit** (See: `rules/git-workflow.md`)
+6. **Create Commit** (See: `rules/git-workflow.md`)
    - Format: `<type>: <description>`
    - Types: feat, fix, refactor, docs, test, chore, perf, ci
    - Keep subject line under 72 characters
@@ -74,19 +78,26 @@ $ARGUMENTS:
 ## Interactive Mode
 
 If no arguments provided:
-1. Show `git status` and `git diff` to analyze all changes
-2. Run **security-reviewer** if changes involve auth/input/secrets
-3. Run **code-reviewer** for quality check
-4. Group changes into logical units:
-   - By feature/functionality
-   - By file relationship (e.g., component + test + styles)
-   - By change type (feat vs fix vs refactor)
-5. For each logical unit:
-   - Stage related files
-   - Auto-detect commit type
-   - Auto-generate commit message
-   - Create commit
-6. Repeat until all changes are committed
+1. Show `git status` and `git diff --staged` to analyze changes
+2. **If staged changes exist** (regardless of unstaged):
+   - Commit only the staged changes
+   - Run **security-reviewer** if staged changes involve auth/input/secrets
+   - Run **code-reviewer** for quality check on staged changes
+   - Auto-detect commit type and generate message
+   - Create single commit for staged changes
+3. **If no staged changes** (only unstaged):
+   - Run **security-reviewer** if changes involve auth/input/secrets
+   - Run **code-reviewer** for quality check
+   - Group changes into logical units:
+     - By feature/functionality
+     - By file relationship (e.g., component + test + styles)
+     - By change type (feat vs fix vs refactor)
+   - For each logical unit:
+     - Stage related files
+     - Auto-detect commit type
+     - Auto-generate commit message
+     - Create commit
+   - Repeat until all changes are committed
 
 ## Related Rules
 
