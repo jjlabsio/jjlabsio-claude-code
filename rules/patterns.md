@@ -44,22 +44,37 @@ interface Repository<T> {
 
 ## HTTP Requests
 
-- **Default**: Use `ky` for all HTTP requests
-- **Exception**: Native `fetch` only for Next.js caching options
+- **Default**: Use `ky` (client components, Server Components)
+- **Exception 1**: Native `fetch` for Next.js caching options
+- **Exception 2**: Native `fetch` for API Routes/Route Handlers/server utilities (ky is ESM-only, incompatible with Vercel serverless bundling)
 
 ```typescript
-// Default: ky
+// Default: ky (client components, Server Components)
 const data = await ky.get("api/users").json<User[]>();
 
-// Exception: Next.js Server Components with caching
+// Exception 1: Next.js caching
 fetch(url, { next: { revalidate: 3600 }, cache: "force-cache" });
+
+// Exception 2: API Routes / Route Handlers (serverless functions)
+// app/api/webhook/route.ts - use native fetch, NOT ky
+const res = await fetch("https://slack.com/api/chat.postMessage", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(payload),
+});
+if (!res.ok) throw new Error(`Slack API error: ${res.status}`);
 ```
 
-Why `ky`:
+Why `ky` (client/Server Components):
 
 - Auto-throws on non-2xx responses
 - Clean JSON parsing (`.json<T>()`)
 - Built-in hooks, retry, timeout
+
+Why NOT `ky` (serverless functions):
+
+- ESM-only package causes FUNCTION_INVOCATION_FAILED on Vercel
+- Applies to: `app/api/**`, server utilities imported by API routes
 
 ## Data Fetching
 
