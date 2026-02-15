@@ -138,7 +138,7 @@ Claude Code가 **skills와 commands를 하나의 개념으로 통합**했다. �
 ## 진행 상황
 
 - [x] `/learn` + `continuous-learning`
-- [ ] `/tdd` + `tdd-workflow`
+- [x] `/tdd` + `tdd-workflow`
 - [ ] `/verify` + `verification-loop`
 - [ ] `/code-review` + `security-review`
 - [ ] `/test-coverage` → `tdd-workflow` 흡수
