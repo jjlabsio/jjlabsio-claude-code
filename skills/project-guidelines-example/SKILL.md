@@ -342,4 +342,4 @@ SUPABASE_KEY=eyJ...
 - `coding-standards.md` - General coding best practices
 - `backend-patterns.md` - API and database patterns
 - `frontend-patterns.md` - React and Next.js patterns
-- `tdd-workflow/` - Test-driven development methodology
+- `tdd-workflow/` - Test-driven development methodology (`/tdd`)

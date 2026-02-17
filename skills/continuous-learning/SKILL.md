@@ -1,58 +1,61 @@
 ---
-name: continuous-learning
-description: Automatically extract reusable patterns from Claude Code sessions and save them as learned skills for future use.
+name: learn
+description: Extract reusable patterns from Claude Code sessions and save them as learned skills. Works both manually (invoke mid-session) and automatically (Stop hook at session end).
 ---
 
-# Continuous Learning Skill
+# Learn - Extract Reusable Patterns
 
-Automatically evaluates Claude Code sessions on end to extract reusable patterns that can be saved as learned skills.
+세션 중 비자명한 문제를 해결했을 때, 재사용 가능한 패턴을 추출하여 `~/.claude/skills/learned/`에 저장합니다.
 
-## How It Works
+## Usage
 
-This skill runs as a **Stop hook** at the end of each session:
+- **수동**: 세션 중 `/learn` 호출
+- **자동**: Stop hook으로 세션 종료 시 자동 실행 (10+ 메시지 세션만)
 
-1. **Session Evaluation**: Checks if session has enough messages (default: 10+)
-2. **Pattern Detection**: Identifies extractable patterns from the session
-3. **Skill Extraction**: Saves useful patterns to `~/.claude/skills/learned/`
+## What to Extract
 
-## Configuration
+- **Error Resolution** - 에러 원인과 해결 과정
+- **Debugging Techniques** - 비자명한 디버깅 기법, 도구 조합
+- **Workarounds** - 라이브러리/API 우회법, 버전별 이슈
+- **Project-Specific Patterns** - 코드베이스 컨벤션, 아키텍처 결정
 
-Edit `config.json` to customize:
+## What NOT to Extract
 
-```json
-{
-  "min_session_length": 10,
-  "extraction_threshold": "medium",
-  "auto_approve": false,
-  "learned_skills_path": "~/.claude/skills/learned/",
-  "patterns_to_detect": [
-    "error_resolution",
-    "user_corrections",
-    "workarounds",
-    "debugging_techniques",
-    "project_specific"
-  ],
-  "ignore_patterns": [
-    "simple_typos",
-    "one_time_fixes",
-    "external_api_issues"
-  ]
-}
+- 단순 오타, 문법 에러
+- 일회성 이슈 (API 장애 등)
+- 외부 서비스 문제
+
+## Process
+
+1. 세션에서 추출 가능한 패턴 리뷰
+2. 가장 재사용 가치 높은 패턴 식별
+3. 스킬 파일 초안 작성
+4. **사용자 확인 후** `~/.claude/skills/learned/`에 저장
+
+## Output Format
+
+```markdown
+# [Descriptive Pattern Name]
+
+**Extracted:** [Date]
+**Context:** [Brief description of when this applies]
+
+## Problem
+[What problem this solves - be specific]
+
+## Solution
+[The pattern/technique/workaround]
+
+## Example
+[Code example if applicable]
+
+## When to Use
+[Trigger conditions - what should activate this skill]
 ```
 
-## Pattern Types
+## Auto-extraction Hook Setup
 
-| Pattern | Description |
-|---------|-------------|
-| `error_resolution` | How specific errors were resolved |
-| `user_corrections` | Patterns from user corrections |
-| `workarounds` | Solutions to framework/library quirks |
-| `debugging_techniques` | Effective debugging approaches |
-| `project_specific` | Project-specific conventions |
-
-## Hook Setup
-
-Add to your `~/.claude/settings.json`:
+`~/.claude/settings.json`에 추가:
 
 ```json
 {
@@ -68,13 +71,6 @@ Add to your `~/.claude/settings.json`:
 }
 ```
 
-## Why Stop Hook?
+## Configuration
 
-- **Lightweight**: Runs once at session end
-- **Non-blocking**: Doesn't add latency to every message
-- **Complete context**: Has access to full session transcript
-
-## Related
-
-- [The Longform Guide](https://x.com/affaanmustafa/status/2014040193557471352) - Section on continuous learning
-- `/learn` command - Manual pattern extraction mid-session
+`config.json`으로 자동 추출 설정 커스터마이즈 가능 (min_session_length, patterns_to_detect 등).
