@@ -33,14 +33,8 @@ Include specific examples of how to fix issues.
 
 ## Security Checks (CRITICAL)
 
-- Hardcoded credentials (API keys, passwords, tokens)
-- SQL injection risks (string concatenation in queries)
-- XSS vulnerabilities (unescaped user input)
-- Missing input validation
-- Insecure dependencies (outdated, vulnerable)
-- Path traversal risks (user-controlled file paths)
-- CSRF vulnerabilities
-- Authentication bypasses
+For detailed security patterns and checklists, see the `code-review` skill and `security-reviewer` agent.
+Flag any obvious security issues (hardcoded secrets, injection, XSS) and escalate to security-reviewer for deep analysis.
 
 ## Code Quality (HIGH)
 

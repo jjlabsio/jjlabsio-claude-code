@@ -241,6 +241,23 @@ npm test && npm run lint      # Pre-commit hook
 npm test -- --coverage --ci   # CI/CD
 ```
 
+## Coverage Analysis Workflow
+
+When analyzing and improving test coverage:
+
+1. Run tests with coverage: `npm test -- --coverage` or `pnpm test --coverage`
+2. Analyze coverage report (`coverage/coverage-summary.json`)
+3. Identify files below 80% coverage threshold
+4. For each under-covered file:
+   - Analyze untested code paths
+   - Generate unit tests for functions
+   - Generate integration tests for APIs
+   - Generate E2E tests for critical flows
+5. Verify new tests pass
+6. Show before/after coverage metrics
+
+Focus on: happy path, error handling, edge cases (null, undefined, empty), boundary conditions.
+
 ## Integration with Other Commands
 
 - Use `/plan` first to understand what to build
@@ -248,7 +265,6 @@ npm test -- --coverage --ci   # CI/CD
 - Use `/build-and-fix` if build errors occur
 - Use `/code-review` to review implementation
 - Use `/e2e` for E2E testing
-- Use `/test-coverage` to verify coverage
 
 ## Related Agent
 

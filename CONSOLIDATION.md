@@ -139,7 +139,7 @@ Claude Code가 **skills와 commands를 하나의 개념으로 통합**했다. �
 
 - [x] `/learn` + `continuous-learning`
 - [x] `/tdd` + `tdd-workflow`
-- [ ] `/verify` + `verification-loop`
-- [ ] `/code-review` + `security-review`
-- [ ] `/test-coverage` → `tdd-workflow` 흡수
-- [ ] `/commit` 보안 체크 중복 제거
+- [x] `/verify` + `verification-loop` (커맨드 + 스킬 모두 삭제, `/checkpoint`도 함께 삭제)
+- [x] `/code-review` + `security-review` (skill name -> code-review, command 삭제, agent 슬림화)
+- [x] `/test-coverage` → `tdd-workflow` 흡수 (Coverage Analysis 섹션 추가, command 삭제)
+- [x] `/commit` 보안 체크 중복 제거 (인라인 체크리스트 -> skill 참조)

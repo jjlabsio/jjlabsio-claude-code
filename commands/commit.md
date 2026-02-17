@@ -21,14 +21,9 @@ Create a git commit following the project's git-workflow and security rules.
    - **If staged changes exist**: Commit only staged changes (ignore unstaged)
    - **If no staged changes**: Stage and commit all changes with grouping logic
 
-3. **Security Review** (See: `rules/security.md`)
+3. **Security Review** (See: `code-review` skill for full checklist)
    - Use **security-reviewer** agent for code handling auth, user input, or secrets
-   - Verify mandatory security checklist:
-     - [ ] No hardcoded secrets (API keys, passwords, tokens)
-     - [ ] All user inputs validated
-     - [ ] SQL injection prevention (parameterized queries)
-     - [ ] XSS prevention (sanitized HTML)
-     - [ ] Error messages don't leak sensitive data
+   - Verify no hardcoded secrets, proper input validation, and injection prevention
 
 4. **Code Review** (See: `rules/agents.md`)
    - Use **code-reviewer** agent after writing/modifying code
