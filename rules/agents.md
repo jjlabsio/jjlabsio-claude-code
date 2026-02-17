@@ -14,7 +14,7 @@ Located in `~/.claude/agents/`:
 | build-error-resolver | Fix build errors | When build fails |
 | e2e-runner | E2E testing | Critical user flows |
 | refactor-cleaner | Dead code cleanup | Code maintenance |
-| doc-updater | Documentation | Updating docs |
+
 
 ## Immediate Agent Usage
 
