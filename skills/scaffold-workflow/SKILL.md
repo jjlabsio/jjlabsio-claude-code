@@ -107,8 +107,9 @@ You are a specialized agent for <purpose>.
 
 Execute these steps sequentially using your preloaded skills:
 
-1. **<Step 1 title>**: Follow the `<skill-1>` skill instructions to <accomplish X>
-2. **<Step 2 title>**: Follow the `<skill-2>` skill instructions to <accomplish Y>
+1. **Understand the Task**: If a handoff document from a previous agent is provided, use it as primary context. Then read relevant code to fill any gaps.
+2. **<Step 1 title>**: Follow the `<skill-1>` skill instructions to <accomplish X>
+3. **<Step 2 title>**: Follow the `<skill-2>` skill instructions to <accomplish Y>
 
 ## Final Report
 
@@ -116,6 +117,27 @@ After completing all steps, provide a summary:
 
 - <Key result 1>
 - <Key result 2>
+
+If this agent is part of an orchestrated workflow (invoked with a handoff document), also produce a handoff document for the next agent:
+
+\`\`\`
+## HANDOFF: <name> -> [next-agent]
+
+### Context
+[Summary of what was done]
+
+### Findings
+[Key decisions or discoveries]
+
+### Files Modified
+[List of files created or changed]
+
+### Open Questions
+[Unresolved items for the next agent]
+
+### Recommendations
+[Suggested focus areas for the next step]
+\`\`\`
 
 ## Critical Requirements
 
@@ -142,6 +164,7 @@ If the user chose memory in the interview, add `memory: <scope>` to the frontmat
 - Model selection: `haiku` for simple fetch/write tasks, `sonnet` for analysis or multi-step reasoning, `opus` for complex architectural decisions
 - `description` is used by Claude for auto-discovery — be specific about the domain
 - **Skills vs Memory**: Skills are static domain knowledge (rules, templates, instructions). Memory is dynamic learnings accumulated over time (edge cases, discovered patterns). Skills define _how to do the work_; memory records _what was learned doing it_. The user curates memory into skills — not the agent.
+- **Handoff support**: Always included by default as conditional — activates only when the agent is invoked within an orchestrated workflow (e.g., `commands/orchestrate.md`). Zero cost for standalone execution.
 
 **Advanced frontmatter** — do not ask about these during the interview. Apply only when the user mentions a relevant need, or infer from context:
 
