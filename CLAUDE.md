@@ -70,7 +70,7 @@ model: opus                   # haiku, sonnet, or opus
 [Agent prompt content]
 ```
 
-Available agents: planner, architect, tdd-guide, code-reviewer, security-reviewer, e2e-runner, refactor-cleaner
+Available agents: planner, architect, tdd-guide, code-reviewer, security-reviewer, refactor-cleaner
 
 ## Command Definitions
 
