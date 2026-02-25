@@ -96,57 +96,57 @@ Supports: npm, pnpm, yarn, bun. Auto-detects from lock files and package.json.
 
 ### Agents
 
-| Agent | Purpose |
-|-------|---------|
-| planner | Implementation planning and task breakdown |
-| architect | System design and architectural decisions |
-| tdd-guide | Test-driven development enforcement |
-| code-reviewer | Code quality and security review |
-| security-reviewer | Vulnerability analysis (OWASP Top 10) |
-| database-reviewer | PostgreSQL query optimization and schema design |
-| build-error-resolver | Build error diagnosis and fix |
-| e2e-runner | Playwright E2E test generation and execution |
-| refactor-cleaner | Dead code detection and removal |
-| doc-updater | Documentation and codemap sync |
+| Agent | 설명 |
+|-------|------|
+| planner | 구현 계획 수립 및 작업 분해 |
+| architect | 시스템 설계 및 아키텍처 의사결정 |
+| tdd-guide | 테스트 주도 개발(TDD) 워크플로우 강제 |
+| code-reviewer | 코드 품질 및 보안 리뷰 |
+| security-reviewer | 보안 취약점 분석 (OWASP Top 10) |
+| database-reviewer | PostgreSQL 쿼리 최적화 및 스키마 설계 |
+| build-error-resolver | 빌드 오류 진단 및 수정 |
+| e2e-runner | Playwright E2E 테스트 생성 및 실행 |
+| refactor-cleaner | 불필요한 코드(dead code) 탐지 및 제거 |
+| doc-updater | 문서 및 코드맵 동기화 |
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `/plan` | Create implementation plan |
-| `/tdd` | Test-driven development workflow |
-| `/code-review` | Code quality review |
-| `/orchestrate` | Multi-agent sequential workflow |
-| `/build-fix` | Fix build errors |
-| `/e2e` | Generate and run E2E tests |
-| `/refactor-clean` | Remove dead code |
-| `/update-docs` | Update documentation |
-| `/update-codemaps` | Update codemaps |
-| `/verify` | Run verification loop |
-| `/test-coverage` | Analyze test coverage |
-| `/learn` | Extract patterns from session |
-| `/sessions` | Manage session history |
-| `/setup-pm` | Configure package manager |
-| `/skill-create` | Generate skills from git history |
+| Command | 설명 |
+|---------|------|
+| `/plan` | 구현 계획 생성 |
+| `/tdd` | 테스트 주도 개발 워크플로우 |
+| `/code-review` | 코드 품질 리뷰 |
+| `/orchestrate` | 멀티 에이전트 순차 워크플로우 |
+| `/build-fix` | 빌드 오류 수정 |
+| `/e2e` | E2E 테스트 생성 및 실행 |
+| `/refactor-clean` | 불필요한 코드 제거 |
+| `/update-docs` | 문서 업데이트 |
+| `/update-codemaps` | 코드맵 업데이트 |
+| `/verify` | 검증 루프 실행 (빌드, 린트, 테스트, 보안) |
+| `/test-coverage` | 테스트 커버리지 분석 |
+| `/learn` | 세션에서 패턴 추출 |
+| `/sessions` | 세션 히스토리 관리 |
+| `/setup-pm` | 패키지 매니저 설정 |
+| `/skill-create` | Git 히스토리에서 스킬 생성 |
 
 ### Skills
 
-| Skill | Description |
-|-------|-------------|
-| coding-standards | TypeScript, JavaScript, React, Node.js standards |
-| frontend-patterns | React, Next.js, state management, performance |
-| backend-patterns | API design, database, caching, Node.js patterns |
-| api-design | REST API resource naming, pagination, error responses |
-| postgres-patterns | PostgreSQL query optimization, indexing, schema design |
-| database-migrations | Migration patterns for Prisma, Drizzle, and raw SQL |
-| docker-patterns | Docker Compose, networking, volumes, container security |
-| deployment-patterns | CI/CD, Docker, health checks, rollback strategies |
-| security-review | Authentication, user input, secrets, API security |
-| tdd-workflow | TDD methodology (RED-GREEN-REFACTOR) |
-| e2e-testing | Playwright patterns, Page Object Model, CI/CD |
-| verification-loop | Build, lint, test, security verification before deploy |
-| continuous-learning | Auto-extract patterns from sessions |
-| strategic-compact | Context compaction at logical breakpoints |
+| Skill | 설명 |
+|-------|------|
+| coding-standards | TypeScript, JavaScript, React, Node.js 코딩 표준 |
+| frontend-patterns | React, Next.js, 상태 관리, 성능 최적화 패턴 |
+| backend-patterns | API 설계, 데이터베이스, 캐싱, Node.js 패턴 |
+| api-design | REST API 리소스 네이밍, 페이지네이션, 에러 응답 |
+| postgres-patterns | PostgreSQL 쿼리 최적화, 인덱싱, 스키마 설계 |
+| database-migrations | Prisma, Drizzle, raw SQL 마이그레이션 패턴 |
+| docker-patterns | Docker Compose, 네트워킹, 볼륨, 컨테이너 보안 |
+| deployment-patterns | CI/CD, Docker, 헬스체크, 롤백 전략 |
+| security-review | 인증, 사용자 입력 검증, 시크릿 관리, API 보안 |
+| tdd-workflow | TDD 방법론 (RED-GREEN-REFACTOR) |
+| e2e-testing | Playwright 패턴, Page Object Model, CI/CD 통합 |
+| verification-loop | 배포 전 빌드, 린트, 테스트, 보안 검증 |
+| continuous-learning | 세션에서 재사용 가능한 패턴 자동 추출 |
+| strategic-compact | 논리적 구간에서 컨텍스트 압축 제안 |
 
 ---
 
@@ -197,37 +197,37 @@ Or use the orchestrated workflow:
 
 ## Hooks
 
-Hooks run automatically on tool events. No configuration needed after plugin install.
+플러그인 설치 후 자동으로 도구 이벤트에 연동됩니다. 별도 설정 불필요.
 
-### PreToolUse (before tool execution)
+### PreToolUse (도구 실행 전)
 
-| Hook | What It Does |
-|------|-------------|
-| Dev server blocker | Blocks `npm run dev` outside tmux |
-| Tmux reminder | Suggests tmux for long-running commands |
-| Git push reminder | Review changes before `git push` |
-| Doc file blocker | Blocks random `.md`/`.txt` creation |
-| Strategic compact | Suggests `/compact` every ~50 tool calls |
+| Hook | 동작 |
+|------|------|
+| Dev server blocker | tmux 밖에서 `npm run dev` 실행 차단 |
+| Tmux reminder | 장시간 실행 명령에 tmux 사용 권장 |
+| Git push reminder | `git push` 전 변경사항 리뷰 알림 |
+| Doc file blocker | 불필요한 `.md`/`.txt` 파일 생성 차단 |
+| Strategic compact | ~50회 도구 호출마다 `/compact` 제안 |
 
-### PostToolUse (after tool execution)
+### PostToolUse (도구 실행 후)
 
-| Hook | What It Does |
-|------|-------------|
-| PR logger | Logs PR URL after `gh pr create` |
-| Build analysis | Background analysis after build commands |
-| Prettier format | Auto-formats JS/TS files after edits |
-| TypeScript check | Runs `tsc --noEmit` after `.ts`/`.tsx` edits |
-| console.log warning | Warns about `console.log` in edited files |
+| Hook | 동작 |
+|------|------|
+| PR logger | `gh pr create` 후 PR URL 기록 |
+| Build analysis | 빌드 명령 후 백그라운드 분석 실행 |
+| Prettier format | JS/TS 파일 편집 후 자동 포맷팅 |
+| TypeScript check | `.ts`/`.tsx` 편집 후 `tsc --noEmit` 실행 |
+| console.log warning | 편집된 파일에 `console.log` 포함 시 경고 |
 
-### Lifecycle
+### Lifecycle (생명주기)
 
-| Hook | What It Does |
-|------|-------------|
-| Session start | Loads previous context, detects package manager |
-| Pre-compact | Saves state before context compaction |
-| Console.log audit | Checks modified files after each response |
-| Session end | Persists session state |
-| Pattern extraction | Evaluates session for reusable patterns |
+| Hook | 동작 |
+|------|------|
+| Session start | 이전 컨텍스트 로드, 패키지 매니저 감지 |
+| Pre-compact | 컨텍스트 압축 전 상태 저장 |
+| Console.log audit | 응답마다 수정된 파일의 console.log 검사 |
+| Session end | 세션 상태 영속화 |
+| Pattern extraction | 세션에서 재사용 가능한 패턴 평가 및 추출 |
 
 ### Disabling a Hook
 
