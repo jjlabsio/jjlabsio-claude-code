@@ -263,15 +263,15 @@ Override in `~/.claude/settings.json`:
 
 환경변수 설정:
 
-```json
-// ~/.claude/settings.json
-{
-  "env": {
-    "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_xxx",
-    "FIRECRAWL_API_KEY": "fc-xxx"
-  }
-}
+```bash
+# ~/.zshenv (권장)
+export GITHUB_PERSONAL_ACCESS_TOKEN="ghp_xxx"
+export FIRECRAWL_API_KEY="fc-xxx"
 ```
+
+설정 후 터미널을 재시작하거나 `source ~/.zshenv`로 적용합니다.
+
+> **보안**: API 키를 `~/.claude/settings.json`의 `env` 필드에 평문으로 저장하지 마세요. 세션 로그에 노출될 수 있습니다. `~/.zshenv`에 환경변수로 등록하면 Claude Code CLI가 셸 환경변수를 자동으로 상속합니다. 파일 권한은 `chmod 600 ~/.zshenv`로 설정하세요.
 
 > **claude-in-chrome**: Claude Code Chrome 확장 설치 시 자동 활성화되는 내장 MCP입니다. 별도 설정이 필요 없습니다.
 
