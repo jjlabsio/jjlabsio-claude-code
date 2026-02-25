@@ -92,6 +92,16 @@ When modifying this plugin:
 - Command frontmatter must include: description
 - Test changes by installing the plugin locally
 - **Version updates**: Both `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` must be updated together
+- **Agent 추가 시**: `agents/` 디렉토리에 에이전트 파일을 추가하면 반드시 `.claude-plugin/plugin.json`의 `"agents"` 배열에도 경로를 등록해야 함
+
+### 커밋 전 플러그인 호환성 체크 (필수)
+
+플러그인 설정(`.claude-plugin/plugin.json`, `.mcp.json`, `hooks/hooks.json` 등)이 변경된 경우 커밋 전에 반드시:
+
+1. **설치 호환성 확인**: 변경된 설정이 플러그인을 그대로 설치(`/plugin install`)해서 바로 사용 가능한지 검증
+2. **추가 설정 필요 시 README 업데이트 강제**: 사용자가 별도 설정(환경변수, MCP 서버 설치, 외부 도구 등)을 해야 하는 경우 반드시 `README.md`에 설정 방법을 문서화
+   - 예: 새로운 MCP 서버 추가 → README에 해당 서버 설치/설정 방법 기재
+   - 예: 새로운 환경변수 필요 → README에 필요한 환경변수 목록과 설정법 기재
 
 ### Rules 작성 가이드라인 (중요)
 
