@@ -93,6 +93,7 @@ Supports: npm, pnpm, yarn, bun. Auto-detects from lock files and package.json.
 | Skills | 13 |
 | Rules | common (8) + typescript (5) |
 | Hooks | PreToolUse (5) + PostToolUse (5) + Lifecycle (5) |
+| MCP Servers | 4 (bundled) + 1 (built-in) |
 
 ### Agents
 
@@ -244,6 +245,44 @@ Override in `~/.claude/settings.json`:
       }
     ]
   }
+}
+```
+
+---
+
+## MCP Servers (Bundled)
+
+플러그인 설치 시 4개의 MCP 서버가 자동으로 등록됩니다. 별도 설치가 필요 없습니다.
+
+| Server | Type | 설명 | 필요한 설정 |
+|--------|------|------|------------|
+| context7 | npx | 라이브러리 문서 실시간 조회 | 없음 |
+| vercel | http | Vercel 배포 및 프로젝트 관리 | 첫 사용 시 OAuth |
+| github | http | GitHub 저장소, PR, 이슈 작업 | `GITHUB_PERSONAL_ACCESS_TOKEN` |
+| firecrawl | npx | 웹 스크래핑, 검색, 크롤링 | `FIRECRAWL_API_KEY` |
+
+환경변수 설정:
+
+```json
+// ~/.claude/settings.json
+{
+  "env": {
+    "GITHUB_PERSONAL_ACCESS_TOKEN": "ghp_xxx",
+    "FIRECRAWL_API_KEY": "fc-xxx"
+  }
+}
+```
+
+> **claude-in-chrome**: Claude Code Chrome 확장 설치 시 자동 활성화되는 내장 MCP입니다. 별도 설정이 필요 없습니다.
+
+### 불필요한 서버 비활성화
+
+프로젝트별로 비활성화할 수 있습니다:
+
+```json
+// 프로젝트/.claude/settings.local.json
+{
+  "disabledMcpServers": ["firecrawl"]
 }
 ```
 
