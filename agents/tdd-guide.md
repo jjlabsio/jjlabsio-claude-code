@@ -78,3 +78,6 @@ npm run test:coverage
 - [ ] Coverage is 80%+
 
 For detailed mocking patterns and framework-specific examples, see `skill: tdd-workflow`.
+When implementing React/Next.js components or hooks, see `skill: jj:frontend-patterns` for component composition, state management, and performance patterns.
+When implementing API routes or server-side code, see `skill: jj:backend-patterns` for repository, service, caching, and error handling patterns.
+When designing API endpoints (URL naming, status codes, response format, pagination), see `skill: jj:api-design`.

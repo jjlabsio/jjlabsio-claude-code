@@ -23,15 +23,15 @@ Backend architecture patterns and best practices for scalable server-side applic
 
 ```typescript
 // ✅ Resource-based URLs
-GET    /api/markets                 # List resources
-GET    /api/markets/:id             # Get single resource
-POST   /api/markets                 # Create resource
-PUT    /api/markets/:id             # Replace resource
-PATCH  /api/markets/:id             # Update resource
-DELETE /api/markets/:id             # Delete resource
+GET    /api/v1/markets                 # List resources
+GET    /api/v1/markets/:id             # Get single resource
+POST   /api/v1/markets                 # Create resource
+PUT    /api/v1/markets/:id             # Replace resource
+PATCH  /api/v1/markets/:id             # Update resource
+DELETE /api/v1/markets/:id             # Delete resource
 
 // ✅ Query parameters for filtering, sorting, pagination
-GET /api/markets?status=active&sort=volume&limit=20&offset=0
+GET /api/v1/markets?status=active&sort=volume&limit=20&offset=0
 ```
 
 ### Repository Pattern
@@ -106,7 +106,7 @@ export function withAuth(handler: NextApiHandler): NextApiHandler {
     const token = req.headers.authorization?.replace('Bearer ', '')
 
     if (!token) {
-      return res.status(401).json({ error: 'Unauthorized' })
+      return res.status(401).json({ error: { code: 'unauthorized', message: 'Missing authorization token' } })
     }
 
     try {
@@ -114,7 +114,7 @@ export function withAuth(handler: NextApiHandler): NextApiHandler {
       req.user = user
       return handler(req, res)
     } catch (error) {
-      return res.status(401).json({ error: 'Invalid token' })
+      return res.status(401).json({ error: { code: 'unauthorized', message: 'Invalid token' } })
     }
   }
 }
@@ -268,6 +268,7 @@ async function getMarketWithCache(id: string): Promise<Market> {
 class ApiError extends Error {
   constructor(
     public statusCode: number,
+    public code: string,
     public message: string,
     public isOperational = true
   ) {
@@ -279,16 +280,17 @@ class ApiError extends Error {
 export function errorHandler(error: unknown, req: Request): Response {
   if (error instanceof ApiError) {
     return NextResponse.json({
-      success: false,
-      error: error.message
+      error: { code: error.code, message: error.message }
     }, { status: error.statusCode })
   }
 
   if (error instanceof z.ZodError) {
     return NextResponse.json({
-      success: false,
-      error: 'Validation failed',
-      details: error.errors
+      error: {
+        code: 'validation_error',
+        message: 'Validation failed',
+        details: error.errors
+      }
     }, { status: 400 })
   }
 
@@ -296,8 +298,7 @@ export function errorHandler(error: unknown, req: Request): Response {
   console.error('Unexpected error:', error)
 
   return NextResponse.json({
-    success: false,
-    error: 'Internal server error'
+    error: { code: 'internal_error', message: 'Internal server error' }
   }, { status: 500 })
 }
 
@@ -305,7 +306,7 @@ export function errorHandler(error: unknown, req: Request): Response {
 export async function GET(request: Request) {
   try {
     const data = await fetchData()
-    return NextResponse.json({ success: true, data })
+    return NextResponse.json({ data })
   } catch (error) {
     return errorHandler(error, request)
   }
@@ -360,7 +361,7 @@ export function verifyToken(token: string): JWTPayload {
     const payload = jwt.verify(token, process.env.JWT_SECRET!) as JWTPayload
     return payload
   } catch (error) {
-    throw new ApiError(401, 'Invalid token')
+    throw new ApiError(401, 'invalid_token', 'Invalid token')
   }
 }
 
@@ -368,7 +369,7 @@ export async function requireAuth(request: Request) {
   const token = request.headers.get('authorization')?.replace('Bearer ', '')
 
   if (!token) {
-    throw new ApiError(401, 'Missing authorization token')
+    throw new ApiError(401, 'unauthorized', 'Missing authorization token')
   }
 
   return verifyToken(token)
@@ -380,7 +381,7 @@ export async function GET(request: Request) {
 
   const data = await getDataForUser(user.userId)
 
-  return NextResponse.json({ success: true, data })
+  return NextResponse.json({ data })
 }
 ```
 
@@ -467,7 +468,7 @@ export async function GET(request: Request) {
 
   if (!allowed) {
     return NextResponse.json({
-      error: 'Rate limit exceeded'
+      error: { code: 'rate_limit_exceeded', message: 'Rate limit exceeded' }
     }, { status: 429 })
   }
 
@@ -526,7 +527,7 @@ export async function POST(request: Request) {
   // Add to queue instead of blocking
   await indexQueue.add({ marketId })
 
-  return NextResponse.json({ success: true, message: 'Job queued' })
+  return NextResponse.json({ data: { message: 'Job queued' } })
 }
 ```
 
@@ -586,10 +587,10 @@ export async function GET(request: Request) {
 
   try {
     const markets = await fetchMarkets()
-    return NextResponse.json({ success: true, data: markets })
+    return NextResponse.json({ data: markets })
   } catch (error) {
     logger.error('Failed to fetch markets', error as Error, { requestId })
-    return NextResponse.json({ error: 'Internal error' }, { status: 500 })
+    return NextResponse.json({ error: { code: 'internal_error', message: 'Internal error' } }, { status: 500 })
   }
 }
 ```
