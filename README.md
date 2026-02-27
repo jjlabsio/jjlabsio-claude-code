@@ -129,7 +129,6 @@ Supports: npm, pnpm, yarn, bun. Auto-detects from lock files and package.json.
 | `/e2e` | E2E 테스트 생성 및 실행 |
 | `/refactor-clean` | 불필요한 코드 제거 |
 | `/update-docs` | 문서 업데이트 |
-| `/update-codemaps` | 코드맵 업데이트 |
 | `/verify` | 검증 루프 실행 (빌드, 린트, 테스트, 보안) |
 | `/test-coverage` | 테스트 커버리지 분석 |
 | `/learn` | 세션에서 패턴 추출 |
