@@ -33,3 +33,10 @@ src/
 - **Domain code** (`src/domains/<Name>/`): only used within that domain
 - Cross-domain imports (e.g. `../../OtherDomain/hooks/useFoo`) are a code smell — extract to shared or reconsider boundaries
 - Deleting a feature = deleting its domain directory. No orphaned files
+
+## API Handling
+
+- **Data fetching**: Use TanStack Query (`@tanstack/react-query`) — no raw `fetch` or custom `useQuery` hooks
+- **HTTP client**: Use `ky` instead of `fetch` directly
+- Query keys: array form `['resource', id]` for granular cache invalidation
+- Mutations: use `useMutation` + `queryClient.invalidateQueries` on success

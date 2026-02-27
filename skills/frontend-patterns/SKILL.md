@@ -11,7 +11,7 @@ Modern frontend patterns for React, Next.js, and performant user interfaces.
 
 - Building React components (composition, props, rendering)
 - Managing state (useState, useReducer, Zustand, Context)
-- Implementing data fetching (SWR, React Query, server components)
+- Implementing data fetching (TanStack Query + Ky)
 - Optimizing performance (memoization, virtualization, code splitting)
 - Working with forms (validation, controlled inputs, Zod schemas)
 - Handling client-side routing and navigation
@@ -101,28 +101,21 @@ export function Tab({ id, children }: { id: string, children: React.ReactNode })
 
 ```typescript
 interface DataLoaderProps<T> {
-  url: string
-  children: (data: T | null, loading: boolean, error: Error | null) => React.ReactNode
+  queryKey: readonly unknown[]
+  fetcher: () => Promise<T>
+  children: (data: T | undefined, loading: boolean, error: Error | null) => React.ReactNode
 }
 
-export function DataLoader<T>({ url, children }: DataLoaderProps<T>) {
-  const [data, setData] = useState<T | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
-
-  useEffect(() => {
-    fetch(url)
-      .then(res => res.json())
-      .then(setData)
-      .catch(setError)
-      .finally(() => setLoading(false))
-  }, [url])
-
-  return <>{children(data, loading, error)}</>
+export function DataLoader<T>({ queryKey, fetcher, children }: DataLoaderProps<T>) {
+  const { data, isLoading, error } = useQuery({ queryKey, queryFn: fetcher })
+  return <>{children(data, isLoading, error as Error | null)}</>
 }
 
 // Usage
-<DataLoader<Market[]> url="/api/markets">
+<DataLoader
+  queryKey={['markets']}
+  fetcher={() => api.get('markets').json<Market[]>()}
+>
   {(markets, loading, error) => {
     if (loading) return <Spinner />
     if (error) return <Error error={error} />
@@ -150,59 +143,53 @@ export function useToggle(initialValue = false): [boolean, () => void] {
 const [isOpen, toggleOpen] = useToggle()
 ```
 
-### Async Data Fetching Hook
+### Data Fetching with TanStack Query + Ky
 
 ```typescript
-interface UseQueryOptions<T> {
-  onSuccess?: (data: T) => void
-  onError?: (error: Error) => void
-  enabled?: boolean
+import ky from 'ky'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+
+// ✅ Shared Ky instance — set baseUrl, auth headers, error hooks here
+export const api = ky.create({ prefixUrl: '/api' })
+
+// ✅ Query hook
+export function useMarkets() {
+  return useQuery({
+    queryKey: ['markets'],
+    queryFn: () => api.get('markets').json<Market[]>()
+  })
 }
 
-export function useQuery<T>(
-  key: string,
-  fetcher: () => Promise<T>,
-  options?: UseQueryOptions<T>
-) {
-  const [data, setData] = useState<T | null>(null)
-  const [error, setError] = useState<Error | null>(null)
-  const [loading, setLoading] = useState(false)
+// ✅ Query with params
+export function useMarket(id: string) {
+  return useQuery({
+    queryKey: ['markets', id],
+    queryFn: () => api.get(`markets/${id}`).json<Market>(),
+    enabled: !!id
+  })
+}
 
-  const refetch = useCallback(async () => {
-    setLoading(true)
-    setError(null)
-
-    try {
-      const result = await fetcher()
-      setData(result)
-      options?.onSuccess?.(result)
-    } catch (err) {
-      const error = err as Error
-      setError(error)
-      options?.onError?.(error)
-    } finally {
-      setLoading(false)
+// ✅ Mutation with cache invalidation
+export function useCreateMarket() {
+  const queryClient = useQueryClient()
+  return useMutation({
+    mutationFn: (data: CreateMarketInput) =>
+      api.post('markets', { json: data }).json<Market>(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['markets'] })
     }
-  }, [fetcher, options])
-
-  useEffect(() => {
-    if (options?.enabled !== false) {
-      refetch()
-    }
-  }, [key, refetch, options?.enabled])
-
-  return { data, error, loading, refetch }
+  })
 }
 
 // Usage
-const { data: markets, loading, error, refetch } = useQuery(
-  'markets',
-  () => fetch('/api/markets').then(r => r.json()),
-  {
-    onSuccess: data => console.log('Fetched', data.length, 'markets'),
-    onError: err => console.error('Failed:', err)
-  }
-)
+function MarketList() {
+  const { data: markets, isLoading, error } = useMarkets()
+  const createMarket = useCreateMarket()
+
+  if (isLoading) return <Spinner />
+  if (error) return <Error error={error} />
+  return <ul>{markets!.map(m => <li key={m.id}>{m.name}</li>)}</ul>
+}
 ```
 
 ### Debounce Hook
