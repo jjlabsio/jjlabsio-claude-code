@@ -54,14 +54,21 @@ Claude Code plugins cannot distribute `rules` automatically. Install them manual
 git clone https://github.com/jjlabsio/jjlabsio-claude-code.git
 cd jjlabsio-claude-code
 
-# Copy common rules (required)
-cp -r rules/common ~/.claude/rules/common
+# Install common + TypeScript rules
+./install.sh typescript
+```
 
-# Copy TypeScript rules
+<details>
+<summary>Manual install (alternative)</summary>
+
+```bash
+cp -r rules/common ~/.claude/rules/common
 cp -r rules/typescript ~/.claude/rules/typescript
 ```
 
 > **Important:** Copy entire directories — do NOT flatten with `/*`. Common and TypeScript directories contain files with the same names. Flattening causes overwrites.
+
+</details>
 
 ### Step 3: Configure Package Manager
 
