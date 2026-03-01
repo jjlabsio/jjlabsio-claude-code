@@ -1,7 +1,7 @@
 {
   "name": "jj",
-  "version": "1.0.20",
-  "description": "Claude Code configuration collection for jjlabsio",
+  "version": "2.0.0",
+  "description": "Superpowers 보완 플러그인 — 도메인 지식 스킬, PostToolUse 훅, /learn 커맨드",
   "author": {
     "name": "jjlabsio",
     "url": "https://github.com/jjlabsio"
@@ -9,19 +9,7 @@
   "homepage": "https://github.com/jjlabsio/jjlabsio-claude-code",
   "repository": "https://github.com/jjlabsio/jjlabsio-claude-code",
   "license": "MIT",
-  "keywords": ["agents", "skills", "hooks", "commands"],
+  "keywords": ["skills", "hooks", "commands"],
   "skills": ["./skills/", "./commands/"],
-  "agents": [
-    "./agents/planner.md",
-    "./agents/tdd-guide.md",
-    "./agents/code-reviewer.md",
-    "./agents/security-reviewer.md",
-    "./agents/architect.md",
-    "./agents/build-error-resolver.md",
-    "./agents/e2e-runner.md",
-    "./agents/refactor-cleaner.md",
-    "./agents/doc-updater.md",
-    "./agents/database-reviewer.md"
-  ],
   "mcpServers": "./.mcp.json"
 }
