@@ -47,7 +47,7 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 
 `install.sh`로 설치되는 항상-적용 규칙 (도메인 지식은 skills에):
 
-- `common/` — 코딩 스타일, 보안 체크리스트
+- `common/` — DRY 원칙, 불변성, 보안 체크리스트
 - `typescript/` — TS 코딩 스타일, 프론트엔드 구조
 - `turborepo-env.md` — Turborepo 환경변수 체크리스트
 

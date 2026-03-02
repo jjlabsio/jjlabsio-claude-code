@@ -8,13 +8,11 @@ Superpowers 보완 플러그인으로서, rules는 항상 자동 로딩되어 co
 ```
 rules/
 ├── common/
-│   ├── coding-style.md  # 네이밍, immutability, 코드 스멜
+│   ├── coding-style.md  # DRY 원칙, immutability
 │   └── turborepo.md     # Turborepo 규칙
 ├── typescript/
 │   ├── coding-style.md  # console.log 금지, Zod, TS 고유 규칙
 │   └── frontend.md      # colocation 구조, TanStack Query
-├── python/              # Python specific
-└── golang/              # Go specific
 ```
 
 ## Installation
@@ -23,11 +21,6 @@ rules/
 
 ```bash
 ./install.sh typescript
-./install.sh python
-./install.sh golang
-
-# Install multiple languages at once
-./install.sh typescript python
 ```
 
 ### Option 2: Manual Installation
