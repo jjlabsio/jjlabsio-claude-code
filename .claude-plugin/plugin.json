@@ -1,6 +1,6 @@
 {
   "name": "jj",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Superpowers 보완 플러그인 — 도메인 지식 스킬, PostToolUse 훅, /learn 커맨드",
   "author": {
     "name": "jjlabsio",
