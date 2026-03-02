@@ -37,6 +37,7 @@ src/
 ## API Handling
 
 - **Data fetching**: Use TanStack Query (`@tanstack/react-query`) — no raw `fetch` or custom `useQuery` hooks
-- **HTTP client**: Use `ky` instead of `fetch` directly
+- **HTTP client (CSR)**: Use `ky` with TanStack Query for client-side API calls
+- **HTTP client (Server)**: Use native `fetch` — Next.js extends it with caching/revalidation
 - Query keys: array form `['resource', id]` for granular cache invalidation
 - Mutations: use `useMutation` + `queryClient.invalidateQueries` on success
