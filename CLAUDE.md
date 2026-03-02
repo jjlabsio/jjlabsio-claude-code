@@ -20,7 +20,7 @@ hooks/
 scripts/
   hooks/                # 훅 실행 스크립트
   lib/utils.js          # 공유 유틸리티
-rules/                  # 코딩 스타일, 보안, 테스트 규칙
+rules/                  # 최소 규칙 (코딩 스타일, 보안)
 ```
 
 ## 훅 동작

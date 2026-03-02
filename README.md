@@ -43,12 +43,13 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 | post-edit-console-warn | PostToolUse | Edit | console.log 경고 (라인 번호 포함) |
 | check-console-log | Stop | * | 수정된 파일 console.log 최종 검사 |
 
-### Rules
+### Rules (최소 유지)
 
-`install.sh`로 설치되는 코딩 규칙:
+`install.sh`로 설치되는 항상-적용 규칙 (도메인 지식은 skills에):
 
-- `common/` — 코딩 스타일, 보안, 테스트, 성능, Git 워크플로우
-- 언어별 규칙 (typescript 등)
+- `common/` — 코딩 스타일, 보안 체크리스트
+- `typescript/` — TS 코딩 스타일, 프론트엔드 구조
+- `turborepo-env.md` — Turborepo 환경변수 체크리스트
 
 ## Superpowers와의 공존 원칙
 
