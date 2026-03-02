@@ -60,7 +60,6 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 `.mcp.json`에 설정된 MCP 서버:
 
 - **context7** — 라이브러리 문서 검색
-- **firecrawl** — 웹 스크래핑/검색
 
 ## 라이선스
 
