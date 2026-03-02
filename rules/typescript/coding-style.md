@@ -7,22 +7,6 @@ paths:
 ---
 # TypeScript/JavaScript Coding Style
 
-> This file extends [common/coding-style.md](../common/coding-style.md) with TypeScript/JavaScript specific content.
-
-## Error Handling
-
-Use async/await with try-catch:
-
-```typescript
-try {
-  const result = await riskyOperation()
-  return result
-} catch (error) {
-  console.error('Operation failed:', error)
-  throw new Error('Detailed user-friendly message')
-}
-```
-
 ## Input Validation
 
 Use Zod for schema-based validation:

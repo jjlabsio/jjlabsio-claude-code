@@ -31,12 +31,6 @@ MANY SMALL FILES > FEW LARGE FILES:
 - Extract utilities from large modules
 - Organize by feature/domain, not by type
 
-## Error Handling
-
-- Provide user-friendly error messages in UI-facing code
-- Log detailed error context on the server side
-- Never silently swallow errors
-
 ## Async Patterns
 
 - Use `Promise.all` for independent parallel operations
@@ -55,6 +49,5 @@ Before marking work complete:
 - [ ] Functions are small (<50 lines)
 - [ ] Files are focused (<800 lines)
 - [ ] No deep nesting (>4 levels)
-- [ ] Proper error handling
 - [ ] No hardcoded values (use constants or config)
 - [ ] No mutation (immutable patterns used)
