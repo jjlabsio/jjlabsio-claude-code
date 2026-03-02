@@ -7,10 +7,10 @@ Superpowers 보완 플러그인으로서, rules는 항상 자동 로딩되어 co
 
 ```
 rules/
-├── turborepo-env.md     # Turborepo 환경변수 체크리스트
 ├── common/
 │   ├── coding-style.md  # 네이밍, immutability, 코드 스멜
-│   └── security.md      # 커밋 전 보안 체크리스트
+│   ├── security.md      # 커밋 전 보안 체크리스트
+│   └── turborepo.md     # Turborepo 규칙
 ├── typescript/
 │   ├── coding-style.md  # console.log 금지, Zod, TS 고유 규칙
 │   └── frontend.md      # colocation 구조, TanStack Query
@@ -38,5 +38,5 @@ rules/
 ```bash
 cp -r rules/common ~/.claude/rules/common
 cp -r rules/typescript ~/.claude/rules/typescript
-cp rules/turborepo-env.md ~/.claude/rules/
+# turborepo-env.md is now inside common/
 ```

@@ -1,8 +1,8 @@
-# Turborepo Environment Variables
+# Turborepo
 
 ## Trigger
 
-Apply when adding or modifying environment variables in a turborepo project.
+Always apply when working in a turborepo project.
 
 ## Required Action
 
