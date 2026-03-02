@@ -22,7 +22,3 @@ if (!apiKey) {
   throw new Error('OPENAI_API_KEY not configured')
 }
 ```
-
-## Agent Support
-
-- Use **security-reviewer** skill for comprehensive security audits

@@ -10,10 +10,8 @@ rules/
 │   ├── coding-style.md
 │   ├── git-workflow.md
 │   ├── testing.md
-│   ├── performance.md
 │   ├── patterns.md
 │   ├── hooks.md
-│   ├── agents.md
 │   └── security.md
 ├── typescript/      # TypeScript/JavaScript specific
 ├── python/          # Python specific
