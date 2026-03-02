@@ -61,7 +61,6 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 
 - **context7** — 라이브러리 문서 검색
 - **firecrawl** — 웹 스크래핑/검색
-- **vercel** — Vercel 배포 관리
 
 ## 라이선스
 

@@ -9,9 +9,5 @@
     "env": {
       "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
     }
-  },
-  "vercel": {
-    "type": "http",
-    "url": "https://mcp.vercel.com"
   }
 }
