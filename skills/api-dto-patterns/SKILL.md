@@ -24,7 +24,7 @@ Schema는 handler/route 파일과 분리하여 `dto.ts`에 정의한다.
 - body, query, params 각각 별도 schema 정의
 - `z.infer<>` 로 타입 추출 필수 (수동 interface/type 정의 금지)
 - `any`, `unknown` 직접 사용 금지 — 반드시 Zod를 거쳐야 함
-- schema에서 `.transform()`, `.default()` 등 비즈니스 로직 금지 — validation만
+- schema에서 `.transform()` 등 비즈니스 로직 금지 — `.default()`, `.coerce` 는 query/params에 한해 허용
 - Prisma generated types (`Prisma.XxxCreateInput` 등)를 Request DTO로 사용 금지 — DTO는 항상 별도 Zod schema로 정의
 
 ## Next.js (App Router)
