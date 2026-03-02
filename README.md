@@ -22,18 +22,13 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 |--------|------|
 | `/learn` | 세션에서 반복 패턴을 추출하여 스킬로 저장 |
 
-### 스킬 (8개 — 도메인 지식)
+### 스킬 (3개 — 도메인 지식)
 
 | 스킬 | 설명 |
 |------|------|
-| `frontend-patterns` | React/Next.js 컴포넌트, 상태 관리, 렌더링 패턴 |
-| `backend-patterns` | Node.js 서버, 미들웨어, 에러 핸들링 패턴 |
-| `api-dto-patterns` | API Request DTO — Zod schema 정의, 파일 구조, 네이밍 (Next.js / NestJS) |
-| `database-migrations` | DB 스키마 변경, 마이그레이션 전략 |
-| `postgres-patterns` | PostgreSQL 쿼리 최적화, 인덱싱, 성능 |
-| `e2e-testing` | Playwright/Cypress E2E 테스트 패턴 |
-| `deployment-patterns` | CI/CD, 배포 전략, 환경 설정 |
-| `docker-patterns` | Dockerfile, docker-compose, 컨테이너 패턴 |
+| `backend-patterns` | Backend architecture rules — error handling, caching, logging, data access |
+| `database-migrations` | Database migration safety rules, zero-downtime procedures |
+| `api-dto-patterns` | API Request DTO — Zod schema, file structure, naming (Next.js / NestJS) |
 
 ### 훅 (4개)
 
@@ -48,9 +43,10 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 
 `install.sh`로 설치되는 항상-적용 규칙 (도메인 지식은 skills에):
 
-- `common/` — DRY 원칙, 불변성, 보안 체크리스트
-- `typescript/` — TS 코딩 스타일, 프론트엔드 구조
-- `turborepo-env.md` — Turborepo 환경변수 체크리스트
+- `common/coding-style.md` — DRY 원칙, 설계 원칙
+- `common/turborepo.md` — Turborepo 환경변수 체크리스트
+- `typescript/coding-style.md` — TS 코딩 스타일 (`*.ts`, `*.tsx`, `*.js`)
+- `typescript/frontend.md` — 프론트엔드 구조 (`*.tsx`, `*.jsx`)
 
 ## Superpowers와의 공존 원칙
 
