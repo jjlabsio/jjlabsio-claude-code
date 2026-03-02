@@ -5,24 +5,24 @@ description: Backend architecture rules - project-specific decisions for error h
 
 # Backend Architecture Rules
 
-Claude 기본 행동으로 커버되지 않는 프로젝트 고유 아키텍처 결정.
+Project-specific architecture decisions not covered by Claude's default behavior.
 
-## 에러 핸들링
+## Error Handling
 
-- 커스텀 `ApiError` 클래스를 정의하고 `statusCode`, `message`, `isOperational` 을 포함한다.
-- 입력 검증 에러(Zod 등)는 400으로 반환하고 `details` 에 필드별 에러를 포함한다.
+- Define a custom `ApiError` class that includes `statusCode`, `message`, and `isOperational`.
+- Return input validation errors (Zod, etc.) as 400 with per-field errors in `details`.
 
-## 캐싱
+## Caching
 
-- 캐시는 Repository를 감싸는 데코레이터 패턴으로 구현한다 (CachedXxxRepository).
-- Service나 Controller에 캐시 로직을 넣지 않는다.
-- 캐시 무효화 메서드를 반드시 함께 구현한다.
+- Implement caching as a decorator pattern wrapping the Repository (CachedXxxRepository).
+- Do not place cache logic in Service or Controller layers.
+- Always implement cache invalidation methods alongside caching.
 
-## 로깅
+## Logging
 
-- 모든 요청에 `requestId`를 부여하고 로그에 포함한다.
-- PII(개인정보)는 로그에 포함하지 않는다.
+- Assign a `requestId` to every request and include it in logs.
+- Never include PII (personally identifiable information) in logs.
 
-## 쿼리 규칙
+## Query Rules
 
-- 여러 테이블 변경이 필요하면 반드시 트랜잭션으로 감싼다.
+- Always wrap multi-table changes in a transaction.

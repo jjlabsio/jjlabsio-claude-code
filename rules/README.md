@@ -1,18 +1,18 @@
 # Rules
 
-Superpowers 보완 플러그인으로서, rules는 항상 자동 로딩되어 context window를 차지하므로 최소한만 유지한다.
-도메인 지식은 skills에 집중한다.
+As a supplementary plugin for Superpowers, rules are always auto-loaded and consume context window, so keep them minimal.
+Concentrate domain knowledge in skills.
 
 ## Structure
 
 ```
 rules/
 ├── common/
-│   ├── coding-style.md  # DRY 원칙, immutability
-│   └── turborepo.md     # Turborepo 규칙
+│   ├── coding-style.md  # DRY principles, immutability
+│   └── turborepo.md     # Turborepo rules
 ├── typescript/
-│   ├── coding-style.md  # console.log 금지, Zod, TS 고유 규칙
-│   └── frontend.md      # colocation 구조, TanStack Query
+│   ├── coding-style.md  # no console.log, Zod, TS-specific rules
+│   └── frontend.md      # colocation structure, TanStack Query
 ```
 
 ## Installation

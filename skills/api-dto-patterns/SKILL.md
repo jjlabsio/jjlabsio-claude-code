@@ -5,31 +5,31 @@ description: API Request DTO patterns - Zod schema definition, file structure, n
 
 # API DTO Patterns
 
-API endpoint 작업 시 Request 입력을 항상 Zod schema로 정의한다. Response는 대상 아님.
+Always define Request inputs as Zod schemas when working on API endpoints. Response is not in scope.
 
 ## Common Rules
 
 ### File Separation
 
-Schema는 handler/route 파일과 분리하여 `dto.ts`에 정의한다.
+Define schemas in a separate `dto.ts` file, not in the handler/route file.
 
 ### Naming Convention
 
 - Schema: `{Action}{Resource}{Source}Schema` (e.g., `CreateUserBodySchema`)
 - Source: `Body` | `Query` | `Params`
-- Type: `z.infer<typeof schema>` → Schema 이름에서 "Schema" 제거 (e.g., `CreateUserBody`)
+- Type: `z.infer<typeof schema>` — Remove "Schema" from the schema name (e.g., `CreateUserBody`)
 
 ### Mandatory Rules
 
-- body, query, params 각각 별도 schema 정의
-- `z.infer<>` 로 타입 추출 필수 (수동 interface/type 정의 금지)
-- `any`, `unknown` 직접 사용 금지 — 반드시 Zod를 거쳐야 함
-- schema에서 `.transform()` 등 비즈니스 로직 금지 — `.default()`, `.coerce` 는 query/params에 한해 허용
-- Prisma generated types (`Prisma.XxxCreateInput` 등)를 Request DTO로 사용 금지 — DTO는 항상 별도 Zod schema로 정의
+- Define separate schemas for body, query, and params
+- Always extract types with `z.infer<>` (no manual interface/type definitions)
+- Never use `any` or `unknown` directly — always validate through Zod
+- No business logic in schemas (e.g., `.transform()`) — `.default()` and `.coerce` are allowed only for query/params
+- Never use Prisma generated types (`Prisma.XxxCreateInput`, etc.) as Request DTOs — always define DTOs as separate Zod schemas
 
 ## Next.js (App Router)
 
-Route segment 옆에 `dto.ts` 배치 (colocation 원칙):
+Place `dto.ts` next to the route segment (colocation principle):
 
 ```
 app/api/users/
@@ -61,12 +61,12 @@ export async function POST(req: Request) {
 }
 ```
 
-- Server Action에서도 동일하게 `dto.ts` 분리 적용
-- `searchParams`는 `QuerySchema`로 validation
+- Apply the same `dto.ts` separation for Server Actions
+- Validate `searchParams` with `QuerySchema`
 
 ## NestJS
 
-모듈 내 `dto/` 디렉토리에 schema별 파일 분리:
+Separate schema files in the `dto/` directory within the module:
 
 ```
 src/users/
@@ -95,5 +95,5 @@ create(@Body() body: unknown) {
 }
 ```
 
-- class-validator 대신 Zod 사용 (일관성)
-- NestJS Pipe 자동화 또는 명시적 `.parse()` 모두 허용
+- Use Zod instead of class-validator (consistency)
+- Both NestJS Pipe automation and explicit `.parse()` are allowed

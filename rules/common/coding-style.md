@@ -2,7 +2,7 @@
 
 ## Design Principles
 
-- **Business logic DRY**: 비즈니스 로직은 반드시 단일 출처(single source of truth) 유지. 코드의 표면적 유사성만으로 추상화하지 않는다
+- **Business logic DRY**: Business logic must always maintain a single source of truth. Do not abstract based solely on superficial code similarity.
 
 ## Immutability (CRITICAL)
 
