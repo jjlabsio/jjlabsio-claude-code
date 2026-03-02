@@ -14,13 +14,13 @@ description: Commit changes, bump plugin version, and push
    - `/commit` 커맨드 워크플로우로 변경사항 커밋
    - 이후 step 3으로 진행
 
-3. **docs/plan 정리:**
-   - `docs/plan` 디렉토리가 존재하는지 확인
+3. **docs/plans 정리:**
+   - `docs/plans` 디렉토리가 존재하는지 확인
    - 존재하면 삭제 후 별도 커밋:
-     - `rm -rf docs/plan`
+     - `rm -rf docs/plans`
      - `docs/` 디렉토리가 비어있으면 `docs/`도 함께 삭제
-     - `git add -A docs/plan` (또는 `docs/` 전체가 삭제된 경우 `git add -A docs/`)
-     - `git commit -m "chore: clean up docs/plan"`
+     - `git add -A docs/plans` (또는 `docs/` 전체가 삭제된 경우 `git add -A docs/`)
+     - `git commit -m "chore: clean up docs/plans"`
    - 존재하지 않으면 그대로 진행
 
 4. **변경사항이 없는 경우 (step 1에서 변경사항이 없었을 때):**
