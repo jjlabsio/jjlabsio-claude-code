@@ -22,13 +22,12 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 |--------|------|
 | `/learn` | 세션에서 반복 패턴을 추출하여 스킬로 저장 |
 
-### 스킬 (8개 — 도메인 지식)
+### 스킬 (7개 — 도메인 지식)
 
 | 스킬 | 설명 |
 |------|------|
 | `frontend-patterns` | React/Next.js 컴포넌트, 상태 관리, 렌더링 패턴 |
 | `backend-patterns` | Node.js 서버, 미들웨어, 에러 핸들링 패턴 |
-| `api-design` | REST API 설계, 버전 관리, 응답 형식 |
 | `database-migrations` | DB 스키마 변경, 마이그레이션 전략 |
 | `postgres-patterns` | PostgreSQL 쿼리 최적화, 인덱싱, 성능 |
 | `e2e-testing` | Playwright/Cypress E2E 테스트 패턴 |

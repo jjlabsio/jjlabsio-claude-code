@@ -10,7 +10,6 @@ commands/
 skills/
   frontend-patterns/    # React/Next.js 패턴
   backend-patterns/     # Node.js/API 서버 패턴
-  api-design/           # REST API 설계
   database-migrations/  # DB 마이그레이션 패턴
   postgres-patterns/    # PostgreSQL 최적화
   e2e-testing/          # E2E 테스트 패턴
