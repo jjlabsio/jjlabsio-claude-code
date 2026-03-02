@@ -8,13 +8,8 @@ Superpowers 보완 플러그인. 워크플로우는 superpowers가 담당하고,
 commands/
   learn.md              # /learn — 세션 패턴 추출
 skills/
-  frontend-patterns/    # React/Next.js 패턴
-  backend-patterns/     # Node.js/API 서버 패턴
-  database-migrations/  # DB 마이그레이션 패턴
-  postgres-patterns/    # PostgreSQL 최적화
-  e2e-testing/          # E2E 테스트 패턴
-  deployment-patterns/  # 배포 패턴
-  docker-patterns/      # Docker/컨테이너 패턴
+  backend-patterns/     # API 아키텍처 규칙 (3계층 분리, 에러 핸들링, 캐싱, 로깅)
+  database-migrations/  # DB 마이그레이션 안전 규칙 (expand-contract, safety checklist)
 hooks/
   hooks.json            # PostToolUse 3개 + Stop 1개
 scripts/
