@@ -9,7 +9,6 @@ Superpowers 보완 플러그인으로서, rules는 항상 자동 로딩되어 co
 rules/
 ├── common/
 │   ├── coding-style.md  # 네이밍, immutability, 코드 스멜
-│   ├── security.md      # 커밋 전 보안 체크리스트
 │   └── turborepo.md     # Turborepo 규칙
 ├── typescript/
 │   ├── coding-style.md  # console.log 금지, Zod, TS 고유 규칙

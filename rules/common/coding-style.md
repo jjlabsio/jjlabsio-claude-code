@@ -2,9 +2,7 @@
 
 ## Design Principles
 
-- **KISS**: Simplest solution that works. Easy to understand > clever code
 - **DRY**: Extract common logic into reusable functions/components
-- **YAGNI**: Don't build features before they're needed. Start simple, refactor when needed
 
 ## Naming Conventions
 
@@ -35,19 +33,9 @@ MANY SMALL FILES > FEW LARGE FILES:
 
 ## Error Handling
 
-ALWAYS handle errors comprehensively:
-- Handle errors explicitly at every level
 - Provide user-friendly error messages in UI-facing code
 - Log detailed error context on the server side
 - Never silently swallow errors
-
-## Input Validation
-
-ALWAYS validate at system boundaries:
-- Validate all user input before processing
-- Use schema-based validation where available
-- Fail fast with clear error messages
-- Never trust external data (API responses, user input, file content)
 
 ## Async Patterns
 
@@ -59,7 +47,6 @@ ALWAYS validate at system boundaries:
 - Deep nesting (>4 levels): use early returns/guard clauses
 - Magic numbers: extract to named constants
 - Long functions (>50 lines): split into smaller focused functions
-- Comments explaining "what": rewrite code to be self-documenting. Comment only "why"
 
 ## Code Quality Checklist
 

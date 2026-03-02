@@ -9,26 +9,6 @@ paths:
 
 > This file extends [common/coding-style.md](../common/coding-style.md) with TypeScript/JavaScript specific content.
 
-## Immutability
-
-Use spread operator for immutable updates:
-
-```typescript
-// WRONG: Mutation
-function updateUser(user, name) {
-  user.name = name  // MUTATION!
-  return user
-}
-
-// CORRECT: Immutability
-function updateUser(user, name) {
-  return {
-    ...user,
-    name
-  }
-}
-```
-
 ## Error Handling
 
 Use async/await with try-catch:
