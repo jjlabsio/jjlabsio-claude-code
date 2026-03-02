@@ -2,7 +2,7 @@
 
 ## Design Principles
 
-- **DRY**: Extract common logic into reusable functions/components
+- **Business logic DRY**: 비즈니스 로직은 반드시 단일 출처(single source of truth) 유지. 코드의 표면적 유사성만으로 추상화하지 않는다
 
 ## Naming Conventions
 
