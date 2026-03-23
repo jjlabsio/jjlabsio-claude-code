@@ -37,7 +37,9 @@ User → Orchestrator (you) → Worker Agent (fresh subagent)
                            → PASS → result confirmed
 ```
 
-**Context isolation is non-negotiable.** Worker and Evaluator are always separate `Agent` tool calls. Evaluator never sees Worker's reasoning — only the artifacts (code, files, diffs).
+**Context isolation is non-negotiable.** You MUST use the `Agent` tool to dispatch Worker and Evaluator as separate subagents. Do NOT perform Worker or Evaluator work directly in the Orchestrator context. This prevents confirmation bias — the Evaluator must judge the result without knowing the Worker's reasoning.
+
+**This skill must be executed by the main session (top-level), not delegated to a subagent.** Subagents cannot dispatch nested Agent calls, making Worker/Evaluator isolation impossible.
 
 ## Parameters
 
@@ -61,17 +63,26 @@ If the user provides explicit criteria, use them. If not, auto-generate based on
 | Refactoring | Existing tests pass, complexity reduction, readability |
 | UI/Design | Visual consistency, responsiveness, accessibility |
 
-**Always confirm auto-generated criteria with the user before proceeding.** Show the criteria and ask: "이 기준으로 평가할까요?"
+Auto-generated criteria are used immediately without user confirmation. The loop runs autonomously — no mid-process checkpoints or approval steps.
+
+### Step 0.5: Pre-flight
+
+Before the loop begins:
+1. **Verify test command**: Run tests once to confirm they pass and identify the correct command. Monorepos may require running from a subdirectory.
+2. **Identify protected files**: Test files and config files should NOT be modified. Tell the Worker explicitly.
+3. **Populate template variables**:
+   - `KEY_FILES`: source files in the target directory (exclude tests, configs)
+   - `ADDITIONAL_CONTEXT`: project CLAUDE.md, relevant test files (read-only context)
+   - `TEST_COMMAND`: the verified command from step 1
+   - `CHANGED_FILES_LIST`: `git diff --name-only $CHECKPOINT_COMMIT..HEAD` (for Evaluator)
 
 ### Step 1: Create a Safety Checkpoint
 
-Before the loop begins:
-
 ```bash
-git add -A && git stash  # or note the current commit
+CHECKPOINT_COMMIT=$(git rev-parse HEAD)
 ```
 
-Record `CHECKPOINT_COMMIT` — the commit to return to if everything goes wrong.
+If working tree is dirty (`git status --porcelain` non-empty), `git stash` first. Otherwise skip stash.
 
 ### Step 2: The Loop
 
@@ -118,7 +129,8 @@ Use `worker-prompt.md` template. The Worker:
 - Gets: task description, evaluation criteria, codebase context
 - On iteration N > 1: also gets full attempt history with scores, feedback, what_worked, what_failed
 - Performs the work using all available tools (Read, Edit, Write, Bash, Grep, Glob)
-- Commits the result: `git add -A && git commit -m "refine: iteration N - [description]"`
+- Runs tests first. If tests fail, does NOT commit — reports failure and retries
+- Commits only changed source files (not `git add -A`): `git add <changed files> && git commit -m "refine: iteration N - [description]"`
 
 **Worker dispatch example:**
 

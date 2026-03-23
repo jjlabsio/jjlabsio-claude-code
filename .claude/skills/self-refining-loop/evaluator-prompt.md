@@ -23,6 +23,8 @@ Working directory: {{WORKING_DIRECTORY}}
 Changed files (from git diff):
 {{CHANGED_FILES_LIST}}
 
+To compare before/after: `git diff {{CHECKPOINT_COMMIT}}..HEAD --stat` for overview, then `git diff {{CHECKPOINT_COMMIT}}..HEAD -- <file>` for specific files. For large diffs, read the final files directly instead of relying solely on diff output.
+
 ## Your Process
 
 1. Read each changed file in full. Do not skim.

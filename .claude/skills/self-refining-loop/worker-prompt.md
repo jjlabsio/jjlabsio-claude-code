@@ -33,14 +33,16 @@ Additional context:
 ## Instructions
 
 1. Read and understand the relevant code before making changes.
-2. Implement the task according to the evaluation criteria.
-3. Verify your work:
+2. Do NOT modify test files, config files, or files outside the target scope.
+3. Implement the task according to the evaluation criteria.
+4. Verify your work:
    - If tests exist, run them and ensure they pass.
    - If the task involves code, check for syntax errors.
    - If the task involves documentation, re-read for clarity.
-4. Stage and commit your changes:
+4. Run type checks if applicable (e.g., `tsc --noEmit` for TypeScript).
+5. Stage and commit only changed source files:
    ```
-   git add -A && git commit -m "refine: iteration {{ITERATION}} - [brief description]"
+   git add <changed files> && git commit -m "refine: iteration {{ITERATION}} - [brief description]"
    ```
 5. Report what you did — but know that your report will NOT be shown to the evaluator. The evaluator will read your code directly.
 
