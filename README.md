@@ -22,13 +22,14 @@ superpowers가 **워크플로우**(brainstorming → planning → executing → 
 |--------|------|
 | `/learn` | 세션에서 반복 패턴을 추출하여 스킬로 저장 |
 
-### 스킬 (3개 — 도메인 지식)
+### 스킬 (4개)
 
 | 스킬 | 설명 |
 |------|------|
 | `backend-patterns` | Backend architecture rules — error handling, caching, logging, data access |
 | `database-migrations` | Database migration safety rules, zero-downtime procedures |
 | `api-dto-patterns` | API Request DTO — Zod schema, file structure, naming (Next.js / NestJS) |
+| `self-refining-loop` | Worker-Evaluator 반복 개선 루프 — 독립 평가로 품질 수렴 |
 
 ### 훅 (4개)
 
